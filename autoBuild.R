@@ -9,10 +9,11 @@
 
 
 
-autoBuild <- function(numSel){
+autoBuild <- function(numSel = NULL){
 
 
 # Get the Data ------------------------------------------------------------
+
   # Load Data
   mnist <- dataset_mnist()
   x_train <- mnist$train$x
@@ -20,14 +21,18 @@ autoBuild <- function(numSel){
   x_test <- mnist$test$x
   y_test <- mnist$test$y
 
-  # Filter for only the number 3
-  train_indices <- which(y_train == numSel)
-  test_indices <- which(y_test == numSel)
 
-  x_train <- x_train[train_indices, , ]
-  y_train <- y_train[train_indices]
-  x_test <- x_test[test_indices, , ]
-  y_test <- y_test[test_indices]
+  if(!is.null(numSel)){
+    # Filter for selected number
+    train_indices <- which(y_train == numSel)
+    test_indices <- which(y_test == numSel)
+
+    x_train <- x_train[train_indices, , ]
+    y_train <- y_train[train_indices]
+    x_test <- x_test[test_indices, , ]
+    y_test <- y_test[test_indices]
+  }
+
 
   # Preprocess Data
   x_train <- array_reshape(x_train / 255, c(nrow(x_train), 784))
@@ -67,7 +72,7 @@ autoBuild <- function(numSel){
   # - Validation data, which also uses the same input and output format as training data
   history <- autoencoder %>% fit(
     x_train, x_train,
-    epochs = 10,
+    epochs = 5,
     batch_size = 256,
     validation_data = list(x_test, x_test)
   )
@@ -81,3 +86,5 @@ autoBuild <- function(numSel){
   myList <- list('encoder' = encoder, 'td' = x_test, 'trd' = x_train)
   return(myList)
 }
+
+
