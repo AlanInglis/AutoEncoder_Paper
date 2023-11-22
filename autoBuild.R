@@ -72,7 +72,7 @@ autoBuild <- function(numSel = NULL){
   # - Validation data, which also uses the same input and output format as training data
   history <- autoencoder %>% fit(
     x_train, x_train,
-    epochs = 5,
+    epochs = 10,
     batch_size = 256,
     validation_data = list(x_test, x_test)
   )

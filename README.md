@@ -11,7 +11,9 @@ allDigits_allDims <- function() {
   for (digit in 0:9) {
     print(paste("Processing digit:", digit))
     model_results <- autoBuild(numSel = digit)
-    importance_results <- permImp(model_results)
+    importance_results <-permImp(encoderModel =model_results,
+                                  num_permutations = 4,
+                                  MSE = TRUE)
     all_results[[as.character(digit)]] <- importance_results
   }
 
