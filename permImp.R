@@ -61,52 +61,52 @@ permImp <- function(encoderModel, num_permutations = 4, MSE = TRUE) {
 
 
 
-
-permImp <- function(encoderModel, numPerm = 4) {
-  encoder <- encoderModel[[1]] # get encoder model
-  x_test <- encoderModel[[2]] # get test data
-
-  # Encode the original test data
-  original_encoded_imgs <- predict(encoder, x_test)
-
-  # Initialize matrices to store importance
-  varimp <- matrix(NA, nrow = 784, ncol = 32)
-
-  # Permutation importance loop
-  for (i in 1:dim(x_test)[2]) { # Loop over each feature
-    print(paste0('dimension ', i, ' computed'))
-
-    for (n in 1:numPerm) {
-      print(paste0('PERMUTATION ', n, ' BEING COMPUTED'))
-    # Copy the original test data
-    permuted_x_test <- x_test
-
-    # Permute the values in the i-th column (feature)
-    permuted_x_test[, i] <- sample(permuted_x_test[, i])
-
-    # Encode the permuted data
-    permuted_encoded_imgs <- predict(encoder, permuted_x_test, verbose = F)
-
-    for(j in 1:32){
-      varimp[i,j] <- errorMetric(original_encoded_imgs[,j], permuted_encoded_imgs[,j], MSE = F)
-    }
-    }
-  }
-
-  # Store results in a list
-  all_dimensions_importance <- list()
-
-  for(j in 1:32){
-    # Average over dimensions
-    feature_importance_matrix <- matrix(varimp[,j], nrow = 28, ncol = 28)
-
-    # Convert the matrix to a format suitable for ggplot
-    feature_importance_df <- as.data.frame(as.table(feature_importance_matrix))
-    all_dimensions_importance[[as.character(j)]] <- feature_importance_df
-  }
-
-  return(all_dimensions_importance)
-}
+#
+# permImp <- function(encoderModel, numPerm = 4) {
+#   encoder <- encoderModel[[1]] # get encoder model
+#   x_test <- encoderModel[[2]] # get test data
+#
+#   # Encode the original test data
+#   original_encoded_imgs <- predict(encoder, x_test)
+#
+#   # Initialize matrices to store importance
+#   varimp <- matrix(NA, nrow = 784, ncol = 32)
+#
+#   # Permutation importance loop
+#   for (i in 1:dim(x_test)[2]) { # Loop over each feature
+#     print(paste0('dimension ', i, ' computed'))
+#
+#     for (n in 1:numPerm) {
+#       print(paste0('PERMUTATION ', n, ' BEING COMPUTED'))
+#     # Copy the original test data
+#     permuted_x_test <- x_test
+#
+#     # Permute the values in the i-th column (feature)
+#     permuted_x_test[, i] <- sample(permuted_x_test[, i])
+#
+#     # Encode the permuted data
+#     permuted_encoded_imgs <- predict(encoder, permuted_x_test, verbose = F)
+#
+#     for(j in 1:32){
+#       varimp[i,j] <- errorMetric(original_encoded_imgs[,j], permuted_encoded_imgs[,j], MSE = F)
+#     }
+#     }
+#   }
+#
+#   # Store results in a list
+#   all_dimensions_importance <- list()
+#
+#   for(j in 1:32){
+#     # Average over dimensions
+#     feature_importance_matrix <- matrix(varimp[,j], nrow = 28, ncol = 28)
+#
+#     # Convert the matrix to a format suitable for ggplot
+#     feature_importance_df <- as.data.frame(as.table(feature_importance_matrix))
+#     all_dimensions_importance[[as.character(j)]] <- feature_importance_df
+#   }
+#
+#   return(all_dimensions_importance)
+# }
 
 
 
