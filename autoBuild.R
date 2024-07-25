@@ -2,7 +2,8 @@
 #'
 #' @description Build an autoencoder model using the MNIST number data.
 #'
-#' @param numSel Which digit from the MNIST data to filter.
+#' @param numSel Which digit from the MNIST data to filter. If NULL, then entire
+#' data set is used
 #'
 #' @return an encoder model, and both the training and test data.
 #'
@@ -83,8 +84,9 @@ autoBuild <- function(numSel = NULL){
   # Generate encoded (compressed) representations of test images (Dim = 32)
   #encoded_imgs <- predict(encoder, x_test)
 
-  myList <- list('encoder' = encoder, 'td' = x_test, 'trd' = x_train)
+  myList <- list('encoder' = encoder, 'td' = x_test, 'trd' = x_train, 'autoencoder' = autoencoder)
   return(myList)
 }
+
 
 
