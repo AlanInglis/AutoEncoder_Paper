@@ -1,0 +1,2 @@
+Data/col_images.zip filter=lfs diff=lfs merge=lfs -text
+Data/soerenab[[:space:]]AudioMNIST[[:space:]]master[[:space:]]data.zip filter=lfs diff=lfs merge=lfs -text
