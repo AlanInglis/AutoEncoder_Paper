@@ -2,7 +2,7 @@ This repository contains the `R` scripts that accompany the paper titled *"Permu
 
 A description of the contents of each files is as follows: 
 
-* **Data:** This folder contains two zip files. The file `soerenab_AudioMNIST_master_data.zip` contains the raw audio MNIST data. This is originally from: \url{https://github.com/soerenab/AudioMNIST}. The second zip file, `col_images.zip`, contains the processed spectrograms of the audio MNIST data.
+* **Data:** This folder contains two zip files. The file `soerenab_AudioMNIST_master_data.zip` contains the raw audio MNIST data. The data was originally sourced from [here](https://github.com/soerenab/AudioMNIST). The second zip file, `col_images.zip`, contains the processed spectrograms of the audio MNIST data.
 
 * **Paper:** This folder contains a `.pdf` of the finalised article.
 
