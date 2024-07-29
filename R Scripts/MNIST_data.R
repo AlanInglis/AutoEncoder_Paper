@@ -1,6 +1,6 @@
 library(keras)
 library(aim)
-library(dplyr)
+
 
 
 
@@ -17,8 +17,8 @@ library(dplyr)
 # Load results and model --------------------------------------------------
 
 
-# load
-load("/Users/alaninglis/Desktop/Autoencoder Paper/saved_objects/mnist_ex.RData")
+# load data (replace with your path to data)
+load("~/mnist_ex.RData")
 
 
 # convert to new format:

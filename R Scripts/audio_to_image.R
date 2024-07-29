@@ -35,8 +35,8 @@ create_custom_palette <- function(colors) {
 # usage of function
 my_palette <- create_custom_palette(c("deep white" = "black", "deep white2" = "black"))
 
-# Set the parent directory path
-parent_directory <- "/Users/alaninglis/Desktop/autoencoder_stuff/MNIST_speech/soerenab AudioMNIST master data"
+# Set the parent directory path (replace with your path to data)
+parent_directory <- "~/soerenab AudioMNIST master data"
 
 # Get folder names
 folder_names <- sprintf("%02d", 1:60) # Generates folder names from 01 to 60
@@ -66,8 +66,8 @@ for(folder_name in folder_names) {
     person <- parts[2]
     sample_number <- sub("\\.wav$", "", parts[3])
 
-    # Define the output path for the plots
-    output_path <- "/Users/alaninglis/Desktop/autoencoder_stuff/test_images"
+    # Define the output path for the plots (replace with your path to data)
+    output_path <- "~/test_images"
     plot_file_name <- sprintf("%s_%s_%s.png", number_spoken, person, sample_number)
 
     # Create and save the plot

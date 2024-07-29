@@ -17,8 +17,8 @@ library(umap)
 # Load results and model --------------------------------------------------
 
 
-# load
-load("/Users/alaninglis/Desktop/Autoencoder Paper/saved_objects/mnist_speech.RData")
+# load data (replace with your path to data)
+load("~/mnist_speech.RData")
 
 
 # convert to new format:
@@ -48,7 +48,8 @@ load_and_preprocess_image <- function(image_path) {
   return(img)
 }
 
-image_directory <- "/Users/alaninglis/Desktop/autoencoder_stuff/MNIST_speech/col_32"
+
+image_directory <- "~/col_images" # replace with own path to directory
 image_files <- list.files(path = image_directory, pattern = "\\.png$", full.names = TRUE)
 
 

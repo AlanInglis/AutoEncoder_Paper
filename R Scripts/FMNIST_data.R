@@ -1,6 +1,6 @@
 library(keras)
 library(aim)
-library(dplyr)
+
 
 
 
@@ -17,8 +17,8 @@ library(dplyr)
 # Load results and model --------------------------------------------------
 
 
-# load
-load("/Users/alaninglis/Desktop/Autoencoder Paper/saved_objects/fmnist.RData")
+# load data (replace with your path to data)
+load("~/fmnist.RData")
 
 # convert to new format:
 # ae_vimp_enc is the list of input pixel importance, convert column types
