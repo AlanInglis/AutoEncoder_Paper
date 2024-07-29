@@ -3,3 +3,4 @@ Data/soerenab[[:space:]]AudioMNIST[[:space:]]master[[:space:]]data.zip filter=lf
 Data/soerenab_AudioMNIST_master_data.zip filter=lfs diff=lfs merge=lfs -text
 fmnist.RData filter=lfs diff=lfs merge=lfs -text
 Saved_Objects/fmnist.RData filter=lfs diff=lfs merge=lfs -text
+Saved_Objects/mnist_speech.RData filter=lfs diff=lfs merge=lfs -text
