@@ -18,7 +18,7 @@ library(aim)
 
 
 # load data (replace with your path to data)
-load("~/mnist_ex.RData")
+load("/Users/alaninglis/Desktop/AutoEncoder/Saved_Objects/mnist_ex.RData")
 
 
 # convert to new format:
@@ -134,7 +134,7 @@ for (i in 1001:1010) {
 
 # input pixel importance
 ae_vimp_enc <- vimp_input(encoder = encoder, test_data = x_test, num_permutations = 4)
-
+ae_vimp_enc
 # encoded dimension importance
 ae_vimp_dec <- vimp_encoded(encoder = encoder,
                             test_data =  x_test,
@@ -142,11 +142,11 @@ ae_vimp_dec <- vimp_encoded(encoder = encoder,
                             autoencoder = autoencoder,
                             classes = considered_digits,
                             num_permutations = 4)
-
+ae_vimp_dec
 # directional importance
 lm_sum_2  <- vimp_direction(encoder = encoder,
                             test_data =  x_test)
-
+lm_sum_2
 
 
 # plot
