@@ -1,18 +1,27 @@
+# Install devtools if you haven't already
+#install.packages("devtools")
+
+# Install the aim package
+#devtools::install_github("AlanInglis/AIM")
+
 library(keras)
 library(aim)
 
 
 
-
 ################################
-#### Section 2.C MNIST Data ####
+#### Section 2 MNIST Data ####
 ################################
 
 # This script builds the autoencoder and visualises the results for the MNIST data.
-# You can bypass this script by loading the saved object directly, found at https://github.com/AlanInglis/AutoEncoder_Paper
-# This object contains the AE and importance results. If loading saved object, skip to "Run AIM functions" section.
-# NOTE: If loading object, the data must first be converted to the new format
-# via the code provided.
+# You can bypass the fitting of the AE model and permutation importance process by
+# loading the saved data object directly, found at https://github.com/AlanInglis/AutoEncoder_Paper
+# This saved data object contains the AE and importance results. If loading saved object,
+# the data must first be converted to the new format via the code in the "Load results and model"
+# section provided directly below. Following this, skip to "Run AIM functions" section and plot
+# the results. If you wish to fit the AE and recalculate the results, begin at the "Data and Autoencoder"
+# section.
+
 
 # Load results and model --------------------------------------------------
 

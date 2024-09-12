@@ -1,3 +1,10 @@
+# Install devtools if you haven't already
+#install.packages("devtools")
+
+# Install the aim package
+#devtools::install_github("AlanInglis/AIM")
+
+
 library(keras)
 library(aim)
 
@@ -5,20 +12,24 @@ library(aim)
 
 
 #################################
-#### Section 3.A EMNIST Data ####
+#### Section 3.1 EMNIST Data ####
 #################################
 
 # This script builds the autoencoder and visualises the results for the EMNIST data.
-# You can bypass this script by loading the saved object directly, found at https://github.com/AlanInglis/AutoEncoder_Paper
-# This object contains the AE and importance results. If loading saved object, skip to "Run AIM functions" section.
-# NOTE: If loading object, the data must first be converted to the new format
-# via the code provided.
+# You can bypass the fitting of the AE model and permutation importance process by
+# loading the saved data object directly, found at https://github.com/AlanInglis/AutoEncoder_Paper
+# This saved data object contains the AE and importance results. If loading saved object,
+# the data must first be converted to the new format via the code in the "Load results and model"
+# section provided directly below. Following this, skip to "Run AIM functions" section and plot
+# the results. If you wish to fit the AE and recalculate the results, begin at the "Data and Autoencoder"
+# section.
+
+
 
 # Load results and model --------------------------------------------------
 
-
 # load data (replace with your path to data)
-load("~/emnist.RData")
+load("~/Desktop/AutoEncoder/Saved_Objects/emnist.RData")
 
 # convert to new format:
 # ae_vimp_enc is the list of input pixel importance, convert column types
@@ -44,7 +55,7 @@ colnames(ae_vimp_dec)[1] <- 'Class'
 set.seed(1701)
 tensorflow::tf$random$set_seed(1701)
 
-# load data
+# load data (data can be found at https://github.com/AlanInglis/AutoEncoder_Paper)
 df_test <- read.csv("/Users/alaninglis/Desktop/autoencoder_stuff/letters/ltr_b_test.csv", sep = ',')
 df_train <- read.csv("/Users/alaninglis/Desktop//autoencoder_stuff/letters/ltr_b_train.csv", sep = ',')
 
@@ -142,7 +153,7 @@ for (i in 1:8) {
 # Get labels
 labels_test <- df_test$X41
 
-# Convert numberical labels to corresponding vowel
+# Convert numerical labels to corresponding vowel
 number_to_letter <- c("10" = "A", "14" = "E", "18" = "I", "24" = "O", "30" = "U")
 
 # Replace numbers with corresponding letters
@@ -163,7 +174,7 @@ labels_test_letters <- as.character(labels_test_letters)
 
 # input pixel importance
 ae_vimp_enc <- vimp_input(encoder = encoder, test_data = test_images, num_permutations = 4)
-
+ae_vimp_enc
 # encoded dimension importance
 ae_vimp_dec <- vimp_encoded(encoder = encoder,
                             test_data =  test_images,
@@ -171,17 +182,17 @@ ae_vimp_dec <- vimp_encoded(encoder = encoder,
                             autoencoder = autoencoder,
                             classes = c("A", "E", "I", "O", "U"),
                             num_permutations = 4)
-
+ae_vimp_dec
 # directional importance
 lm_sum_2  <- vimp_direction(encoder = encoder,
                             test_data =  test_images)
 
-
+lm_sum_2
 
 # Figure 6:
 plot_input_direction(input_vimp = ae_vimp_enc,
                      encoded_vimp = ae_vimp_dec,
-                     direction_vimp = lmdef,
+                     direction_vimp = lm_sum_2,
                      class = "A",
                      sort = T,
                      topX = 10,
