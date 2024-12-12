@@ -357,20 +357,63 @@ the paper titled <em>“Permutation-Based Visualisation of Input and
 Encoded Space in Autoencoders”</em>.</p>
 <p>A description of the contents of each files is as follows:</p>
 <ul>
-<li><p><strong>Data:</strong> This folder contains two zip files. The
-file <code>soerenab_AudioMNIST_master_data.zip</code> contains the raw
-audio MNIST data. The data was originally sourced from <a href="https://github.com/soerenab/AudioMNIST">here</a>. The second zip
-file, <code>col_images.zip</code>, contains the processed spectrograms
-of the audio MNIST data.</p></li>
+<li><strong>Data:</strong> This folder contains three zip files.</li>
+</ul>
+<p>The zip file <code>AUDIO_MNIST_DATA.zip</code> contains the processed
+spectrograms of the audio MNIST data. The data was originally sourced
+from <a href="https://github.com/soerenab/AudioMNIST">here</a>. The zip
+file <code>col_images.zip</code>, contains the processed spectrograms
+images of the audio MNIST data. The zip file
+<code>EMNIST_DATA.zip</code>, contains the csv files for the letters
+data, filtered for just the vowels (a,e,i,o,u)</p>
+<ul>
 <li><p><strong>Paper:</strong> This folder contains a <code>.pdf</code>
 of the finalised article.</p></li>
-<li><p><strong>R Scripts:</strong> This folder contains the R scripts
+<li><p><strong>R_Scripts:</strong> This folder contains the R scripts
 used to generate the results in the article.</p></li>
-<li><p><strong>Saved_Objects:</strong> This folder contains
-<code>.RData</code> objects that correspond to the results obtained from
-running the R scripts in the <strong>R Scripts</strong> folder and which
-are seen in the finalised article.</p></li>
+<li><p><strong>Saved_Objects:</strong> This folder contains data and
+model objects that correspond to the results obtained from running the R
+scripts in the <strong>R_Scripts</strong> folder and which are seen in
+the finalised article.</p></li>
+<li><p><strong>Preprocessing_data_scripts</strong> These scripts were
+used to generally preprocess the data (e.g., covert spectrogram images
+into csv files etc.) and are not needed to run the scripts in
+<strong>R_Scripts</strong>.</p></li>
 </ul>
+<div id="loading-saved-data-and-model-objects" class="section level1">
+<h1>Loading saved data and model objects</h1>
+<p>To load the saved EMNIST data and model, navigate to the
+<code>Saved_Objects/EMNIST</code> folder/file and download the contents.
+Then in an R script run:</p>
+<pre class="r"><code># Install devtools if you haven&#39;t already
+#install.packages(&quot;devtools&quot;)
+
+# Install the aim package
+#devtools::install_github(&quot;AlanInglis/AIM&quot;)
+
+library(keras)
+library(aim)
+
+# load data and model (replace with your path to data)
+load(&quot;~/emnist_model.RData&quot;)
+autoencoder &lt;- load_model_tf(&quot;~/autoencoder_model_emnist.keras&quot;)
+encoder &lt;- load_model_tf(&quot;~/encoder_model_emnist.keras&quot;)
+
+# Run shiny app (NOTE: sort output by importance, rotation = 1 for correct orientation)
+shiny_vimp(input_vimp = ae_vimp_enc, encoded_vimp = ae_vimp_dec, direction_vimp = lm_sum_2)</code></pre>
+</div>
+<div id="how-to-load-data" class="section level1">
+<h1>How to load data</h1>
+<p>To load a specific preprocessed dataset (e.g., the training and test
+data for the EMNIST example), navigate to the
+<code>DATA/EMNIST.zip</code> folder/file and download and unzip. Then in
+R do:</p>
+<pre class="r"><code># load data (replace with your path to data)
+df_train &lt;- read.csv(&#39;~/Saved_Objects/EMNIST/ltr_train.csv&#39;, sep = &#39;,&#39;)
+df_test &lt;- read.csv(&#39;~/Saved_Objects/EMNIST/ltr_test.csv&#39;, sep = &#39;,&#39;)</code></pre>
+<p>Now the data can be used to build an autoencoder model, like those
+outlined in the scripts in <strong>R_Scripts</strong>.</p>
+</div>
 
 
 
