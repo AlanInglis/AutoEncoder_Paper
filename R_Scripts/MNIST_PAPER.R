@@ -109,19 +109,23 @@ decoded_imgs <- predict(autoencoder, x_test)
 
 # get decoced images
 decoded_imgs <- predict(autoencoder, test_images)
-
 # Adjusting plot layout and improving image quality
 par(mfrow = c(2, 10), mar = c(0.5, 0.5, 2, 0.5), oma = c(2, 2, 2, 2))
-for (i in 1001:1010) {
-  # Original image
-  img <- matrix(x_test[i,], ncol = 28, byrow = TRUE)
-  img <- t(apply(img, 2, rev)) # rotating the image for correct orientation
-  image(1:28, 1:28, img, col = gray((0:255)/255), xaxt = 'n', yaxt = 'n', main = paste("Original", i), cex.main = 0.8)
 
-  # Reconstructed image
+# First row: Original images
+for (i in 1:10) {
+  img <- matrix(x_test[i,], ncol = 28, byrow = TRUE)
+  img <- t(apply(img, 2, rev))
+  image(1:28, 1:28, img, col = gray((0:255)/255), xaxt = 'n', yaxt = 'n',
+        main = paste("Input", i), cex.main = 0.8)
+}
+
+# Second row: Reconstructed images
+for (i in 1:10) {
   img <- matrix(decoded_imgs[i,], ncol = 28, byrow = TRUE)
-  img <- t(apply(img, 2, rev)) # rotating the image for correct orientation
-  image(1:28, 1:28, img, col = gray((0:255)/255), xaxt = 'n', yaxt = 'n', main = paste("Reconstructed", i), cex.main = 0.8)
+  img <- t(apply(img, 2, rev))
+  image(1:28, 1:28, img, col = gray((0:255)/255), xaxt = 'n', yaxt = 'n',
+        main = paste("Output", i), cex.main = 0.8)
 }
 
 # END OF PLOT RECONSTRUCTED

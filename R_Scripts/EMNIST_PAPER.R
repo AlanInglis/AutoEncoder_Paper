@@ -102,33 +102,52 @@ decoded_imgs <- predict(autoencoder, test_images)
 
 # Figure 4 in paper:
 
-# get decoded images
-decoded_imgs <- predict(autoencoder, test_images)
+# Set up the plotting area for 2 rows and 10 columns
+par(mfrow = c(2, 10),                    # 2 rows, 10 columns layout
+    mar = c(0.5, 0.5, 2, 0.5),           # Margins around each plot
+    oma = c(1, 0, 0, 0),                  # Outer margins for the whole plot area
+    mgp = c(1, 0.5, 0),                   # Margin line for title, labels, and axis
+    cex.main = 1.2)                       # Main title size
 
-# Set up the plotting area
-par(mfrow = c(2, 8),    # 2 rows, 8 columns layout
-    mar = c(0.5, 0.5, 2, 0.5),  # Margins around each plot
-    oma = c(1, 0, 0, 0),  # Outer margins for the whole plot area
-    mgp = c(1, 0.5, 0),  # Margin line for title, labels, and axis
-    cex.main = 1.2)  # Main title size
+# Define the selected indices
+selection_class <- c(17, 18, 21, 15, 110, 41, 19, 63, 36, 68)
 
-# Plot original images on the top row
-for (i in 17:24) {
-  img <- test_images[i,]
-  img <- matrix(img, ncol = 28, byrow = TRUE)
-  img <- img[, ncol(img):1]  # Flip horizontally
-  image(1:28, 1:28, img, col = gray((0:255)/255), xaxt = 'n', yaxt = 'n',
-        main = paste("Input", i-16))
+# Plot original images on the top row with sequential titles
+for (j in seq_along(selection_class)) {
+  i <- selection_class[j]  # Actual index in test_images
+  img <- test_images[i, ]
+
+  # Reshape the flat image vector into a 28x28 matrix
+  img_matrix <- matrix(img, ncol = 28, byrow = TRUE)
+
+  # Flip the image horizontally for correct orientation
+  img_flipped <- img_matrix[, ncol(img_matrix):1]
+
+  # Plot the image without axes and add a sequential title
+  image(1:28, 1:28, img_flipped,
+        col = gray((0:255)/255),
+        xaxt = 'n', yaxt = 'n',
+        main = paste("Input", j))
 }
 
-# Plot reconstructed images on the bottom row
-for (i in 17:24) {
-  img <- decoded_imgs[i,]
-  img <- matrix(img, ncol = 28, byrow = TRUE)
-  img <- img[, ncol(img):1]
-  image(1:28, 1:28, img, col = gray((0:255)/255), xaxt = 'n', yaxt = 'n',
-        main = paste("Output", i-16))
+# Plot reconstructed images on the bottom row with sequential titles
+for (j in seq_along(selection_class)) {
+  i <- selection_class[j]  # Actual index in decoded_imgs
+  img <- decoded_imgs[i, ]
+
+  # Reshape the flat image vector into a 28x28 matrix
+  img_matrix <- matrix(img, ncol = 28, byrow = TRUE)
+
+  # Flip the image horizontally for correct orientation
+  img_flipped <- img_matrix[, ncol(img_matrix):1]
+
+  # Plot the image without axes and add a sequential title
+  image(1:28, 1:28, img_flipped,
+        col = gray((0:255)/255),
+        xaxt = 'n', yaxt = 'n',
+        main = paste("Output", j))
 }
+
 
 
 
