@@ -48,8 +48,8 @@ tensorflow::tf$random$set_seed(1701)
 tensorflow::tf$config$experimental$enable_op_determinism()
 
 # load data (data can be found at https://github.com/AlanInglis/AutoEncoder_Paper/Data/EMNIST_DATA.zip)
-df_train <- read.csv('~/Saved_Objects/EMNIST/ltr_train.csv', sep = ',')
-df_test <- read.csv('~/Saved_Objects/EMNIST/ltr_test.csv', sep = ',')
+df_train <- read.csv('~ltr_train.csv', sep = ',')
+df_test <- read.csv('~/ltr_test.csv', sep = ',')
 
 # first column as labels
 train_images <- as.matrix(df_train[, -1])  # Remove labels
